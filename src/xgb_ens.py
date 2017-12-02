@@ -20,8 +20,8 @@ df_tfidf_bnb = pd.read_csv(param.data_path + '/output/feature/tfidf/bnb_prob_12w
 df_tfidf_mnb = pd.read_csv(param.data_path + '/output/feature/tfidf/mnb_prob_12w.csv')
 df_tfidf_svc = pd.read_csv(param.data_path + '/output/feature/tfidf/svc_prob_12w.csv')
 df_amt = pd.read_csv(param.data_path + '/output/feature/amt/amt_12w.csv')
+df_dbow_nn = pd.read_csv(param.data_path + '/output/feature/dbowd2v/nn_prob_12w.csv')
 # df_dm = pd.read_csv(param.data_path + 'dmd2v_stack_20W.csv')
-# df_dbow = pd.read_csv(param.data_path + 'dbowd2v_stack_20W.csv')
 
 df_lb = pd.read_csv(param.data_path + '/output/corpus/all_data.csv', usecols=['id', 'penalty'], nrows=param.train_num)
 df_lb['penalty'] = df_lb['penalty'] - 1  # 让标签属于 [0, 8)
@@ -36,7 +36,7 @@ n_trees = 1000
 esr = 100
 evals = 1
 
-df = pd.concat([df_tfidf_lr, df_tfidf_bnb, df_tfidf_mnb, df_amt], axis=1)
+df = pd.concat([df_tfidf_lr, df_tfidf_bnb, df_tfidf_mnb, df_amt, df_dbow_nn], axis=1)
 print(df.columns)
 num_class = len(pd.value_counts(df_lb['penalty']))
 x = df.iloc[:tr_num]
@@ -78,4 +78,4 @@ df_sub['penalty'] = (bst.predict(dvalid) + 1).astype(int)
 
 df_sub['id'] = df_sub['id'].astype(str)
 df_sub['laws'] = [[1]] * len(df_sub)
-df_sub.to_json(param.data_path + '/output/result/val/1124-xgb-tfidf_lr_bnb_mnb+amt.json', orient='records', lines=True)
+df_sub.to_json(param.data_path + '/output/result/val/1201-xgb-tfidf_lr_bnb_mnb+amt+dbow_nn.json', orient='records', lines=True)
