@@ -7,7 +7,7 @@ import util
 from gensim.models import Word2Vec
 
 ############################ 加载数据 ############################
-df_all = pd.read_csv(param.data_path + '/output/corpus/all_data.csv', encoding='utf8', nrows=param.train_num).reset_index()
+df_all = pd.read_csv(param.data_path + '/output/corpus/all_data.csv', encoding='utf8', nrows=param.train_num)
 df_all['penalty'] = df_all['penalty'] - 1
 
 ############################ w2v ############################
@@ -22,6 +22,6 @@ for text in texts:
 texts = [[token for token in text if frequency[token] >= 5] for text in texts]
 
 util.log('Train Model...')
-w2v = Word2Vec(texts, size=300, window=5, iter=15, workers=12, seed=param.seed)
+w2v = Word2Vec(texts, size=param.w2v_dim, window=5, iter=15, workers=12, seed=param.seed)
 w2v.save(param.data_path + '/output/model/w2v_12w.model')
 util.log('Save done!')
