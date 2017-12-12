@@ -3,3 +3,4 @@ src/.ipynb_checkpoints
 data/input/*
 data/output/*
 src/__pycache__/
+res/
