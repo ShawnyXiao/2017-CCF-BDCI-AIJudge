@@ -115,7 +115,7 @@ tf-idf（英语：term frequency–inverse document frequency）是一种用于�
 
 ![模型结构图](pic/flow.png)
 
-上图给出了本次项目的模型结构。我采用了模型融合中 **stacking** 的思想，使用**两层**的模型结构。第一层使用传统的机器学习模型 LogisticRegression、BernoulliNB 和 MultinomialNB，来训练 tf-idf 特征，从而学习案件文本中的用词特点；其次还使用神经网络模型来训练 Doc2Vec-DBOW 和 Doc2Vec-DM 生成的文档向量特征，从而学习案件文本中的词语的语义关联信息。第二层使用 Xgboost 模型，训练 Word2Vec、统计特征和第一层模型传来的概率特征，从而更深入的学习案件文本与金额类别之间的联系。采用 stacking 的模型融合思想，可以进一步的提升模型预测的准确性和泛化能力。
+上图给出了本次项目的模型结构。我采用了模型融合中 **stacking** 的思想，使用**两层**的模型结构。第一层使用传统的机器学习模型 LogisticRegression、BernoulliNB 和 MultinomialNB，来训练 tf-idf 特征，从而学习案件文本中的用词特点；其次还使用神经网络模型来训练 Doc2Vec-DBOW 和 Doc2Vec-DM 生成的文档向量特征，从而学习案件文本中的词语的语义关联信息。第二层使用 XGBoost 模型，训练 Word2Vec、统计特征和第一层模型传来的概率特征，从而更深入的学习案件文本与金额类别之间的联系。采用 stacking 的模型融合思想，可以进一步的提升模型预测的准确性和泛化能力。
 
 ## 文件目录
 
@@ -162,7 +162,7 @@ tf-idf（英语：term frequency–inverse document frequency）是一种用于�
 6. ```feat_dm_stack.py```：构造 Doc2Vec-DM stacking 特征
 7. ```train_w2v_model.py```：训练 Word2Vec 模型
 8. ```feat_w2v.py```：构造 Word2Vec 特征
-9. ```xgb_ens.py```：使用 Xgboost 结合所有特征进行交叉验证
+9. ```xgb_ens.py```：使用 XGBoost 结合所有特征进行交叉验证
 
 **强烈推荐**直接使用那两个 notebook 文件，因为这些冗余脚本有可能在我更新了 notebook 文件后并没有及时更新。
 
