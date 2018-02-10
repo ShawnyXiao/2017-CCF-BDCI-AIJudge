@@ -4,3 +4,5 @@ data/input/*
 data/output/*
 src/__pycache__/
 res/
+!data/input/README.md
+!data/output/README.md
