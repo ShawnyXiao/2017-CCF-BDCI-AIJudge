@@ -4,7 +4,6 @@
 
 ```
 input
-    dir.md
     law.txt
     stop.txt
     test.txt
